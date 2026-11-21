@@ -51,30 +51,6 @@
       "license": "MIT",
       "buildCmd": "true",
       "testCmd": "bash tools/check-claude-animated-shorts.sh"
-    },
-    {
-      "name": "cicada",
-      "path": "packages/cicada",
-      "language": "swift+js",
-      "runtimeNotes": "Swift 6 package (build on macOS); Cloudflare Workers server validated locally",
-      "upstream": "https://github.com/wquguru/cicada",
-      "upstreamCommit": "8450cb9d43f1367ac9ef1cc0c0d5a128272c70b0",
-      "version": "1.10.1",
-      "license": "Apache-2.0",
-      "buildCmd": "true",
-      "testCmd": "bash tools/check-cicada.sh"
-    },
-    {
-      "name": "mygo-music",
-      "path": "packages/mygo-music",
-      "language": "go",
-      "runtimeNotes": "Go desktop app (MyGo GUI); website uses bun + vite (solid-js 2.0)",
-      "upstream": "https://github.com/egoist/mygo-music",
-      "upstreamCommit": "298c88a03407844ac1c4eb76e3590edfe4577121",
-      "version": "go 1.27.3 toolchain; website: solid-js 2.0.3, @tanstack/solid-start 2.0.0-rc.10, Vite 8.3.8",
-      "license": "AGPL-3.0",
-      "buildCmd": "cd packages/mygo-music && go build ./...",
-      "testCmd": "cd packages/mygo-music && go vet ./... && go test ./internal/... && cd website && bun install && bun run build"
     }
   ]
 }

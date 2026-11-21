@@ -1,6 +1,6 @@
 PYTHON315 ?= /opt/python3.15/bin/python3
 
-PKGS := ffmpeg-skill gif-factory cinecode claude-animated-shorts cicada mygo-music
+PKGS := ffmpeg-skill gif-factory cinecode claude-animated-shorts
 
 CHECK_TARGETS := $(PKGS:%=check-%)
 BUILD_TARGETS := $(PKGS:%=build-%)

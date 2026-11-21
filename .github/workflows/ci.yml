@@ -17,17 +17,11 @@ jobs:
           - gif-factory
           - cinecode
           - claude-animated-shorts
-          - cicada
-          - mygo-music
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - uses: actions/setup-go@v5
-        with:
-          go-version: "stable"
-      - uses: oven-sh/setup-bun@v2
       - name: Install Python 3.15
         run: |
           sudo apt-get update
@@ -44,6 +38,3 @@ jobs:
           sudo cp ffmpeg-n9.0-linux64-gpl-9.0/bin/ff* /usr/local/bin/
       - name: Check ${{ matrix.package }}
         run: bash tools/check-package.sh "${{ matrix.package }}" /opt/python3.15/bin/python3
-        env:
-          # The mygo-music website build asks the GitHub API while it builds.
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

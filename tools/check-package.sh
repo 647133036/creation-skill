@@ -16,7 +16,5 @@ case "$PKG" in
   gif-factory)             bash "$ROOT/tools/check-gif-factory.sh" "$PY" ;;
   cinecode)                bash "$ROOT/tools/check-cinecode.sh" "$PY" ;;
   claude-animated-shorts)  bash "$ROOT/tools/check-claude-animated-shorts.sh" "$PY" ;;
-  cicada)                  bash "$ROOT/tools/check-cicada.sh" "$PY" ;;
-  mygo-music)              bash "$ROOT/tools/check-mygo-music.sh" "$PY" ;;
   *) echo "[$PKG] FAIL: unknown package"; exit 1 ;;
 esac
