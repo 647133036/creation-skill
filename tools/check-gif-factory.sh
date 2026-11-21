@@ -26,6 +26,10 @@ echo "[gif-factory] deps: $("$VENV/bin/python" -c 'import PIL, numpy, scipy; pri
 
 fail=0
 for f in scripts/*.py; do
+  # build_style_previews.py takes no argparse: any argument (including
+  # --help) triggers a full build() that regenerates checked-in GIF
+  # previews and dirties the tree. Skip it in the smoke loop.
+  [ "$(basename "$f")" = "build_style_previews.py" ] && continue
   if ! "$VENV/bin/python" "$f" --help > /dev/null 2>&1; then
     echo "[gif-factory] FAIL: $(basename "$f") --help"
     fail=1
