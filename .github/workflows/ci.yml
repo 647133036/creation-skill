@@ -20,6 +20,10 @@ jobs:
           - rea-video
           - craft-anything
           - unlose
+          - superpowers
+          - open-code-review
+          - rea
+          - graphify
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,5 +49,9 @@ jobs:
         with:
           toolchain: "1.97"
           profile: "minimal"
+      - name: Install Go
+        if: matrix.package == 'open-code-review'
+        run: |
+          # go.mod requires go 1.26; GOTOOLCHAIN=auto handles fetching during check
       - name: Check ${{ matrix.package }}
         run: bash tools/check-package.sh "${{ matrix.package }}" /opt/python3.15/bin/python3

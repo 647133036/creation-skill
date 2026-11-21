@@ -90,6 +90,58 @@
       "license": "Apache-2.0",
       "buildCmd": "cd packages/unlose/src && dotnet build Unlose.sln -c Release",
       "testCmd": "bash tools/check-unlose.sh"
+    },
+    {
+      "name": "superpowers",
+      "path": "packages/superpowers",
+      "language": "typescript",
+      "node": ">=22",
+      "runtimeNotes": "pure skills framework (15 markdown skill dirs + JS harness for coding agents); no build needed; verify package.json + skills dir",
+      "upstream": "https://github.com/obra/superpowers",
+      "upstreamCommit": "22f0b46",
+      "version": "no version tag (module)",
+      "license": "MIT",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-superpowers.sh"
+    },
+    {
+      "name": "open-code-review",
+      "path": "packages/open-code-review",
+      "language": "go",
+      "go": ">=1.26",
+      "runtimeNotes": "Go CLI (ocr) + Node launcher; go vet source verification; GOTOOLCHAIN=auto fetches go1.26; npm global install for CLI",
+      "upstream": "https://github.com/alibaba/open-code-review",
+      "upstreamCommit": "2de8b4d",
+      "version": "@alibaba-group/open-code-review",
+      "license": "Apache-2.0",
+      "buildCmd": "cd packages/open-code-review && GOTOOLCHAIN=auto go build ./cmd/...",
+      "testCmd": "bash tools/check-open-code-review.sh"
+    },
+    {
+      "name": "rea",
+      "path": "packages/rea",
+      "language": "typescript",
+      "node": ">=22.23.4",
+      "runtimeNotes": "Node.js 22.x/24.x/26.x; reverse-engineering MCP server + CLI; tsc --noEmit source verification; needs Hopper/Ghidra/IDA for native analysis",
+      "upstream": "https://github.com/morluto/rea",
+      "upstreamCommit": "6cf4328",
+      "version": "rea-agents (npm)",
+      "license": "MIT",
+      "buildCmd": "cd packages/rea && npx tsc -p tsconfig.build.json",
+      "testCmd": "bash tools/check-rea.sh"
+    },
+    {
+      "name": "graphify",
+      "path": "packages/graphify",
+      "language": "python",
+      "python": ">=3.11.5,<3.15",
+      "runtimeNotes": "knowledge-graph builder via tree-sitter; core deps networkx/numpy/rapidfuzz/pyyaml/tree-sitter; requires uv (or pipx) for install; Python 3.11.5 floor",
+      "upstream": "https://github.com/Graphify-Labs/graphify",
+      "upstreamCommit": "b582ad4",
+      "version": "graphifyy (PyPI)",
+      "license": "Apache-2.0 + MIT",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-graphify.sh"
     }
   ]
 }

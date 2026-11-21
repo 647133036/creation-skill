@@ -18,6 +18,10 @@ case "$PKG" in
   claude-animated-shorts)  bash "$ROOT/tools/check-claude-animated-shorts.sh" "$PY" ;;
   rea-video)               bash "$ROOT/tools/check-rea-video.sh" "$PY" ;;
   craft-anything)          bash "$ROOT/tools/check-craft-anything.sh" ;;
-  unlose)                  bash "$ROOT/tools/check-unlose.sh" ;;
+  unlose)                bash "$ROOT/tools/check-unlose.sh" ;;
+  superpowers)           bash "$ROOT/tools/check-superpowers.sh" ;;
+  open-code-review)      bash "$ROOT/tools/check-open-code-review.sh" ;;
+  rea)                   bash "$ROOT/tools/check-rea.sh" ;;
+  graphify)              bash "$ROOT/tools/check-graphify.sh" ;;
   *) echo "[$PKG] FAIL: unknown package"; exit 1 ;;
 esac

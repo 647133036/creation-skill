@@ -1,6 +1,6 @@
 PYTHON315 ?= /opt/python3.15/bin/python3
 
-PKGS := ffmpeg-skill gif-factory cinecode claude-animated-shorts rea-video craft-anything unlose
+PKGS := ffmpeg-skill gif-factory cinecode claude-animated-shorts rea-video craft-anything unlose superpowers open-code-review rea graphify
 
 CHECK_TARGETS := $(PKGS:%=check-%)
 BUILD_TARGETS := $(PKGS:%=build-%)
