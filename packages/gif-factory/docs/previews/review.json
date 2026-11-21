@@ -1,0 +1,682 @@
+[
+  {
+    "style": "pixel-light",
+    "source": "examples/whale-maid/01-greetings/001.gif",
+    "preview": "docs/previews/pixel-light.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "pixel-light",
+    "source": "examples/whale-maid/02-joy-and-affection/017.gif",
+    "preview": "docs/previews/pixel-light-02.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "pixel-light",
+    "source": "examples/whale-maid/03-emotions/033.gif",
+    "preview": "docs/previews/pixel-light-03.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "pixel-light",
+    "source": "examples/01-replies/001.gif",
+    "preview": "docs/previews/pixel-light-04.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "pixel-light",
+    "source": "examples/02-emotions/017.gif",
+    "preview": "docs/previews/pixel-light-05.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "pixel-light",
+    "source": "examples/06-daily-life/081.gif",
+    "preview": "docs/previews/pixel-light-06.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/boy/01.gif",
+    "preview": "docs/previews/pixel-actions.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/boy/02.gif",
+    "preview": "docs/previews/pixel-actions-02.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/hood/01.gif",
+    "preview": "docs/previews/pixel-actions-03.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/hood/02.gif",
+    "preview": "docs/previews/pixel-actions-04.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/cat/01.gif",
+    "preview": "docs/previews/pixel-actions-05.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/cat/02.gif",
+    "preview": "docs/previews/pixel-actions-06.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/penguin/01.gif",
+    "preview": "docs/previews/pixel-actions-07.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "pixel-actions",
+    "source": "examples/pixel-actions/penguin/02.gif",
+    "preview": "docs/previews/pixel-actions-08.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "illustrated-actions",
+    "source": "examples/mixed-actions/02-二次元/005.gif",
+    "preview": "docs/previews/illustrated-actions.gif",
+    "duration_ms": 1120,
+    "frames": 6,
+    "loop": 0
+  },
+  {
+    "style": "illustrated-actions",
+    "source": "examples/mixed-actions/02-二次元/004.gif",
+    "preview": "docs/previews/illustrated-actions-02.gif",
+    "duration_ms": 1120,
+    "frames": 6,
+    "loop": 0
+  },
+  {
+    "style": "illustrated-actions",
+    "source": "examples/illustrated-actions/01-miku.gif",
+    "preview": "docs/previews/illustrated-actions-03.gif",
+    "duration_ms": 1280,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "illustrated-actions",
+    "source": "examples/illustrated-actions/02-princess-curtsy.gif",
+    "preview": "docs/previews/illustrated-actions-04.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "photo-people",
+    "source": "examples/public-figures-hd/001.gif",
+    "preview": "docs/previews/photo-people.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-people",
+    "source": "examples/public-figures-hd/002.gif",
+    "preview": "docs/previews/photo-people-02.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-people",
+    "source": "examples/public-figures-hd/003.gif",
+    "preview": "docs/previews/photo-people-03.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-people",
+    "source": "examples/public-figures-hd/004.gif",
+    "preview": "docs/previews/photo-people-04.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/01-fun-and-work/001.gif",
+    "preview": "docs/previews/photo-pets.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/01-fun-and-work/002.gif",
+    "preview": "docs/previews/photo-pets-02.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/01-fun-and-work/003.gif",
+    "preview": "docs/previews/photo-pets-03.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/01-fun-and-work/004.gif",
+    "preview": "docs/previews/photo-pets-04.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/02-food-and-life/001.gif",
+    "preview": "docs/previews/photo-pets-05.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/02-food-and-life/002.gif",
+    "preview": "docs/previews/photo-pets-06.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/02-food-and-life/003.gif",
+    "preview": "docs/previews/photo-pets-07.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "photo-pets",
+    "source": "examples/pet-corgi/02-food-and-life/004.gif",
+    "preview": "docs/previews/photo-pets-08.gif",
+    "duration_ms": 1920,
+    "frames": 24,
+    "loop": 0
+  },
+  {
+    "style": "clay-mascot",
+    "source": "examples/clay-bakery/01-croissant.gif",
+    "preview": "docs/previews/clay-mascot.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "clay-mascot",
+    "source": "examples/clay-bakery/02-toast.gif",
+    "preview": "docs/previews/clay-mascot-02.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "clay-mascot",
+    "source": "examples/clay-bakery/03-coffee.gif",
+    "preview": "docs/previews/clay-mascot-03.gif",
+    "duration_ms": 1920,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "clay-mascot",
+    "source": "examples/clay-bakery/04-pull.gif",
+    "preview": "docs/previews/clay-mascot-04.gif",
+    "duration_ms": 2240,
+    "frames": 16,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/01-spider-man.gif",
+    "preview": "docs/previews/lenticular.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/02-ghost-rider.gif",
+    "preview": "docs/previews/lenticular-02.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/03-venom.gif",
+    "preview": "docs/previews/lenticular-03.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/04-iron-man.gif",
+    "preview": "docs/previews/lenticular-04.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/05-batman.gif",
+    "preview": "docs/previews/lenticular-05.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/06-black-panther.gif",
+    "preview": "docs/previews/lenticular-06.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/07-wolverine.gif",
+    "preview": "docs/previews/lenticular-07.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/08-captain-america.gif",
+    "preview": "docs/previews/lenticular-08.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "lenticular",
+    "source": "examples/lenticular-cards/09-deadpool.gif",
+    "preview": "docs/previews/lenticular-09.gif",
+    "duration_ms": 6000,
+    "frames": 29,
+    "loop": 0
+  },
+  {
+    "style": "type-linked",
+    "source": "examples/dynamic-posters/type-linked/01-rin.gif",
+    "preview": "docs/previews/type-linked.gif",
+    "duration_ms": 6000,
+    "frames": 25,
+    "loop": 0
+  },
+  {
+    "style": "type-linked",
+    "source": "examples/dynamic-posters/type-linked/02-luka.gif",
+    "preview": "docs/previews/type-linked-02.gif",
+    "duration_ms": 6000,
+    "frames": 25,
+    "loop": 0
+  },
+  {
+    "style": "type-linked",
+    "source": "examples/dynamic-posters/type-linked/03-teto.gif",
+    "preview": "docs/previews/type-linked-03.gif",
+    "duration_ms": 6000,
+    "frames": 25,
+    "loop": 0
+  },
+  {
+    "style": "type-linked",
+    "source": "examples/dynamic-posters/type-linked/04-len.gif",
+    "preview": "docs/previews/type-linked-04.gif",
+    "duration_ms": 6000,
+    "frames": 25,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/04-yuki.gif",
+    "preview": "docs/previews/comic-fusion.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/01-rin.gif",
+    "preview": "docs/previews/comic-fusion-02.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/02-luka.gif",
+    "preview": "docs/previews/comic-fusion-03.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/03-teto.gif",
+    "preview": "docs/previews/comic-fusion-04.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/05-miku.gif",
+    "preview": "docs/previews/comic-fusion-05.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/06-naruto.gif",
+    "preview": "docs/previews/comic-fusion-06.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/07-luffy.gif",
+    "preview": "docs/previews/comic-fusion-07.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/08-gojo.gif",
+    "preview": "docs/previews/comic-fusion-08.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "comic-fusion",
+    "source": "examples/dynamic-posters/p5-integrated/09-goku.gif",
+    "preview": "docs/previews/comic-fusion-09.gif",
+    "duration_ms": 6000,
+    "frames": 23,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/word-only/Likka.gif",
+    "preview": "docs/previews/signature-word-only.gif",
+    "duration_ms": 4000,
+    "frames": 50,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Mira-Latin.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Mira-Latin.gif",
+    "duration_ms": 4000,
+    "frames": 38,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Yunqi-Seal.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Yunqi-Seal.gif",
+    "duration_ms": 4000,
+    "frames": 50,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Changning-Clerical.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Changning-Clerical.gif",
+    "duration_ms": 4000,
+    "frames": 45,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Wendi-Fine.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Wendi-Fine.gif",
+    "duration_ms": 4000,
+    "frames": 66,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Mumian-Round.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Mumian-Round.gif",
+    "duration_ms": 4000,
+    "frames": 62,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Qinghe-Running.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Qinghe-Running.gif",
+    "duration_ms": 4000,
+    "frames": 43,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Chengfeng-Cursive.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Chengfeng-Cursive.gif",
+    "duration_ms": 4000,
+    "frames": 76,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Weiyang-Geometric.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Weiyang-Geometric.gif",
+    "duration_ms": 4000,
+    "frames": 67,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/multifont/Shijian-Wei.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/multifont/Shijian-Wei.gif",
+    "duration_ms": 4000,
+    "frames": 67,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Levi.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Levi.gif",
+    "duration_ms": 4000,
+    "frames": 20,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Aster.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Aster.gif",
+    "duration_ms": 4000,
+    "frames": 50,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Luna.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Luna.gif",
+    "duration_ms": 4000,
+    "frames": 36,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Iris.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Iris.gif",
+    "duration_ms": 4000,
+    "frames": 51,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Kai.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Kai.gif",
+    "duration_ms": 4000,
+    "frames": 64,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Rowan.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Rowan.gif",
+    "duration_ms": 4000,
+    "frames": 41,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Sage.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Sage.gif",
+    "duration_ms": 4000,
+    "frames": 35,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Nova.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Nova.gif",
+    "duration_ms": 4000,
+    "frames": 50,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/Elio.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/Elio.gif",
+    "duration_ms": 4000,
+    "frames": 53,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Woyun.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Woyun.gif",
+    "duration_ms": 4000,
+    "frames": 37,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Qiyue.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Qiyue.gif",
+    "duration_ms": 4000,
+    "frames": 32,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Zhenxing.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Zhenxing.gif",
+    "duration_ms": 4000,
+    "frames": 34,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Tinglan.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Tinglan.gif",
+    "duration_ms": 4000,
+    "frames": 79,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Zhuyin.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Zhuyin.gif",
+    "duration_ms": 4000,
+    "frames": 47,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Luming.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Luming.gif",
+    "duration_ms": 4000,
+    "frames": 55,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Jinghong.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Jinghong.gif",
+    "duration_ms": 4000,
+    "frames": 57,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Liuying.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Liuying.gif",
+    "duration_ms": 4000,
+    "frames": 30,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Songfeng.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Songfeng.gif",
+    "duration_ms": 4000,
+    "frames": 40,
+    "loop": 0
+  },
+  {
+    "style": "dynamic-signatures",
+    "source": "skills/dynamic-art-signature/assets/media/chinese/Woyunjian.gif",
+    "preview": "skills/dynamic-art-signature/assets/media/chinese/Woyunjian.gif",
+    "duration_ms": 4000,
+    "frames": 50,
+    "loop": 0
+  }
+]
