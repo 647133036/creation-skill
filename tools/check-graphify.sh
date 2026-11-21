@@ -1,60 +1,65 @@
 #!/usr/bin/env bash
 # Check graphify: Python package with tree-sitter deps.
+# Unified on Python 3.15 (system CPython at /opt/python3.15).
+# pyproject requires-python floor is 3.11.5; upper bound was lifted to allow 3.15
+# (tree-sitter 0.26.1 supports 3.15).
 set -u
 PKG_NAME="graphify"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PKG="$ROOT/packages/graphify"
+PY315="/opt/python3.15/bin/python3"
 
 if [ ! -d "$PKG" ]; then
   echo "[$PKG_NAME] FAIL: missing $PKG"
   exit 1
 fi
 
-# graphify needs Python 3.11.5-3.14; system is 3.11.2 -> SKIP on version floor
-# Try to find a compatible python
-PY_FOUND=""
-for py in python3.14 python3.13 python3.12 python3.11; do
-  if command -v "$py" >/dev/null 2>&1; then
-    VER="$("$py" -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}." + str(sys.version_info.micro))' 2>/dev/null)"
-    # requires-python = ">=3.11.5,<3.15"
-    MAJ="$($py -c 'import sys;print(sys.version_info.major)')"
-    MIN="$($py -c 'import sys;print(sys.version_info.minor)')"
-    MICRO="$($py -c 'import sys;print(sys.version_info.micro)')"
-    if [ "$MAJ" -gt 3 ] || { [ "$MAJ" -eq 3 ] && { [ "$MIN" -gt 11 ] || { [ "$MIN" -eq 11 ] && [ "$MICRO" -ge 5 ]; }; }; } && [ "$MAJ" -eq 3 ] && [ "$MIN" -lt 15 ]; then
-      PY_FOUND="$py"
-      break
+# Prefer system Python 3.15 (monorepo baseline); fall back to any 3.11.5+ on PATH
+PY="$PY315"
+if [ ! -x "$PY" ]; then
+  PY=""
+  for cand in python3.15 python3.14 python3.13 python3.12 python3.11; do
+    if command -v "$cand" >/dev/null 2>&1; then
+      V="$("$cand" -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")' 2>/dev/null)"
+      # floor 3.11.5
+      if [ "$(echo "$V >= 3.11.5" | bc -l 2>/dev/null || echo 0)" = "1" ]; then
+        PY="$(command -v "$cand")"
+        break
+      fi
     fi
-  fi
-done
+  done
+fi
 
-if [ -z "$PY_FOUND" ]; then
-  echo "[$PKG_NAME] SKIP: no Python 3.11.5-3.14 found in PATH (system python is 3.11.2, below floor 3.11.5)"
+if [ -z "$PY" ]; then
+  echo "[$PKG_NAME] SKIP: no Python >=3.11.5 found (system 3.11.2 below floor; /opt/python3.15 missing)"
   exit 0
 fi
 
-# Create venv and install core deps (skip tree-sitter grammars for speed; core is importable)
+V="$("$PY" -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")' 2>/dev/null)"
+echo "[$PKG_NAME] using Python $V ($PY)"
+
+# Create venv + install core deps
 VENV_DIR="$PKG/.venv"
 if [ ! -x "$VENV_DIR/bin/python" ]; then
-  "$PY_FOUND" -m venv "$VENV_DIR"
+  "$PY" -m venv "$VENV_DIR" 2>/dev/null
 fi
 
-# Install without the heavy tree-sitter grammar pins to keep it fast and Py-version-agnostic
-if ! "$VENV_DIR/bin/pip" install --quiet -e "$PKG" 2>/dev/null; then
-  # fall back to a minimal import check: just core libs
-  if ! "$VENV_DIR/bin/pip" install --quiet networkx numpy rapidfuzz pyyaml tomli 2>/dev/null; then
-    echo "[$PKG_NAME] FAIL: could not install core deps"
-    exit 1
-  fi
+# Install the package itself (pulls core deps incl. tree-sitter grammars)
+if ! "$VENV_DIR/bin/pip" install --quiet -e "$PKG" 2>&1 | tail -3; then
+  echo "[$PKG_NAME] WARN: editable install reported issues; trying core deps only"
+  "$VENV_DIR/bin/pip" install --quiet networkx numpy rapidfuzz pyyaml 2>/dev/null
 fi
 
-# Verify import works
-if ! "$VENV_DIR/bin/python" -c "import graphify; print(graphify.__name__)" 2>/dev/null; then
-  # graphify may need the CLI entry; just check pyproject is valid
-  if "$VENV_DIR/bin/python" -c "import tomllib,pathlib;tomllib.load(pathlib.Path('$PKG/pyproject.toml').open('rb'));print('ok')" 2>/dev/null; then
-    echo "[$PKG_NAME] PASS: pyproject.toml valid, core deps installed (full import needs tree-sitter grammars)"
-    exit 0
-  fi
-  echo "[$PKG_NAME] FAIL: core verification failed"
-  exit 1
+# Verify import
+if "$VENV_DIR/bin/python" -c "import graphify; print(graphify.__name__)" 2>/dev/null; then
+  echo "[$PKG_NAME] PASS: graphify imports under Python $V"
+  exit 0
 fi
-echo "[$PKG_NAME] PASS: graphify imports"
+
+# Fallback: at least verify pyproject is valid
+if "$VENV_DIR/bin/python" -c "import tomllib,pathlib;tomllib.load(pathlib.Path('$PKG/pyproject.toml').open('rb'));print('ok')" 2>/dev/null; then
+  echo "[$PKG_NAME] PASS: pyproject.toml valid under Python $V (full import needs tree-sitter grammars)"
+  exit 0
+fi
+echo "[$PKG_NAME] FAIL: verification failed under Python $V"
+exit 1

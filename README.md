@@ -31,8 +31,7 @@
 
 | 工具 | 版本 | 说明 |
 |---|---|---|
-| Python | CPython 3.15.2 | 源码编译安装于 `/opt/python3.15`，ffmpeg-skill / gif-factory / cinecode / rea-video 以它为基线 |
-| Python (graphify) | 3.11.5–3.14 | graphify 独立 venv（`packages/graphify/.venv`），不走 3.15 |
+| Python | CPython 3.15.2 | 源码编译安装于 `/opt/python3.15`，全 monorepo 统一基线（ffmpeg-skill / gif-factory / cinecode / rea-video / graphify 均以它为基线） |
 | FFmpeg / ffprobe | 9.0.2 | 系统 PATH，BtbN 静态构建 |
 | Node.js | 22 | cinecode 渲染管线、claude-animated-shorts / superpowers / rea 辅助脚本 |
 | Rust | 1.97+ | craft-anything cargo check / build |
@@ -73,4 +72,4 @@ packages.json   子包 manifest（名称、语言、上游 commit、构建/测�
 - **unlose**：Windows-only（VSS + WPF + .NET service），Linux/macOS 上只做源码验证，构建和运行需 Windows 10/11 x64。
 - **open-code-review**：go.mod 要 Go 1.26，系统 Go 1.25 用 `GOTOOLCHAIN=auto` 自动拉取；CI 上由 check 脚本处理。
 - **rea**：Node.js 22.x/24.x/26.x；native 分析需 Hopper/Ghidra/IDA 之一；静态 JS/.NET 分析无需引擎。
-- **graphify**：Python 版本地板 3.11.5（tree-sitter ABI 要求），系统 3.11.2 不足，走独立 venv；tree-sitter grammars 是 heavy 依赖，核心 import 验证走轻量依赖。
+- **graphify**：统一走 Python 3.15（pyproject `requires-python` 上限已放开；tree-sitter 0.26.1 支持 3.15）；tree-sitter grammars 是 heavy 依赖，核心 import 验证走轻量依赖。
