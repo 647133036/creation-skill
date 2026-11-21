@@ -82,4 +82,4 @@ packages.json   子包 manifest（名称、语言、上游 commit、构建/测�
 - **impeccable**：Rust engine 二进制需 `cargo build --release -p impeccable`；skill 脚本可直接跑，引擎缺失时退化为纯提示词。
 - **hyperframes**：bun workspaces 多包，完整构建/测试需 `bun install`；默认 check 只做 manifest + skill 目录验证，`HYPERFRAMES_FULL=1` 触发全量测试。
 - **security-audit-skill**：纯 prompt + 零依赖校验器，无构建无安装；实际审计需 coding agent 基础设施（agent runtime + 并行 subagent + 沙箱）。
-- **claude-seo**：Claude Code 插件，安装 Python 依赖后需 Claude Code 运行环境才能跑 29 项审计；pytest 套件可独立验证 skill 结构。
+- **claude-seo**：核心 SEO 栈（bs4/requests/lxml/trafilatura/matplotlib/google-api 等）已实测于 Python 3.15；google-ads 全系 ≤35.1.0 声明 `Requires-Python <3.15`，仅服务可选的 seo-google 关键词规划，装 3.15 需等上游支持；PDF 报告需系统 pango；实际审计需 Claude Code 运行环境，pytest 可经 `CLAUDE_SEO_FULL=1` 触发。
