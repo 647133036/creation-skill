@@ -24,6 +24,11 @@ jobs:
           - open-code-review
           - rea
           - graphify
+          - hallmark
+          - impeccable
+          - hyperframes
+          - security-audit-skill
+          - claude-seo
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -44,11 +49,16 @@ jobs:
           tar -xf /tmp/ffmpeg.tar.xz
           sudo cp ffmpeg-n9.0-linux64-gpl-9.0/bin/ff* /usr/local/bin/
       - name: Install Rust
-        if: matrix.package == 'craft-anything'
+        if: matrix.package == 'craft-anything' || matrix.package == 'impeccable'
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: "1.97"
           profile: "minimal"
+      - name: Install bun
+        if: matrix.package == 'hyperframes'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
       - name: Install Go
         if: matrix.package == 'open-code-review'
         run: |

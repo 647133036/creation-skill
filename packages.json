@@ -142,6 +142,72 @@
       "license": "Apache-2.0 + MIT",
       "buildCmd": "true",
       "testCmd": "bash tools/check-graphify.sh"
+    },
+    {
+      "name": "hallmark",
+      "path": "packages/hallmark",
+      "language": "typescript+markdown",
+      "node": ">=18",
+      "runtimeNotes": "anti-AI-slop design skill (50 material themes + browser sloplint gates); pure skill, no build; optional Chrome + puppeteer-core for render lint",
+      "upstream": "https://github.com/nutlope/hallmark",
+      "upstreamCommit": "04977e1",
+      "version": "hallmark (npm skills)",
+      "license": "MIT",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-hallmark.sh"
+    },
+    {
+      "name": "impeccable",
+      "path": "packages/impeccable",
+      "language": "rust+typescript",
+      "rust": ">=1.97",
+      "node": ">=22",
+      "runtimeNotes": "design vocabulary skill + Rust engine binary (cargo build -p impeccable); per-harness skill dirs (.claude/.cursor/.codex/...); cargo check optional",
+      "upstream": "https://github.com/pbakaus/impeccable",
+      "upstreamCommit": "b49177d",
+      "version": "0.1.27",
+      "license": "Apache-2.0",
+      "buildCmd": "cd packages/impeccable && cargo build --release -p impeccable",
+      "testCmd": "bash tools/check-impeccable.sh"
+    },
+    {
+      "name": "hyperframes",
+      "path": "packages/hyperframes",
+      "language": "typescript (bun monorepo)",
+      "node": "bun runtime",
+      "runtimeNotes": "agent-native HTML-to-video framework (HeyGen); bun workspaces; 9 skill dirs; bun test optional (HYPERFRAMES_FULL=1)",
+      "upstream": "https://github.com/heygen-com/hyperframes",
+      "upstreamCommit": "af0664c",
+      "version": "hyperframes-monorepo (bun workspaces)",
+      "license": "Apache-2.0",
+      "buildCmd": "cd packages/hyperframes && bun install && bun run build",
+      "testCmd": "bash tools/check-hyperframes.sh"
+    },
+    {
+      "name": "security-audit-skill",
+      "path": "packages/security-audit-skill",
+      "language": "markdown+javascript (zero-dep)",
+      "node": ">=18",
+      "runtimeNotes": "Cloudflare 6-phase security-audit orchestration skill; prompt files + 2 zero-dep node validators; no build, no install",
+      "upstream": "https://github.com/cloudflare/security-audit-skill",
+      "upstreamCommit": "c1c8a8c",
+      "version": "security-audit-skill",
+      "license": "MIT",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-security-audit-skill.sh"
+    },
+    {
+      "name": "claude-seo",
+      "path": "packages/claude-seo",
+      "language": "python",
+      "python": ">=3.11",
+      "runtimeNotes": "29 SEO sub-skills + 20 specialist agents for Claude Code; pyproject manifest + pytest suite; pip install -r requirements.txt",
+      "upstream": "https://github.com/AgriciDaniel/claude-seo",
+      "upstreamCommit": "468ed5b",
+      "version": "claude-seo (plugin)",
+      "license": "MIT",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-claude-seo.sh"
     }
   ]
 }
