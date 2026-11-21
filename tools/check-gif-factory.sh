@@ -14,10 +14,11 @@ VENV="$P/.venv"
 if [ ! -x "$VENV/bin/python" ]; then
   "$PY" -m venv "$VENV" || { echo "[gif-factory] FAIL: venv create"; exit 1; }
 fi
-# Latest stable pins, pre-release excluded.
+# Install the pinned versions from requirements.txt; upgrade to latest
+# stable (pre-release excluded) to keep the check aligned with the suite.
 "$VENV/bin/python" -m pip install --quiet --upgrade pip > /dev/null 2>&1
-"$VENV/bin/python" -m pip install --quiet --upgrade "pillow" "numpy" "scipy" || {
-  echo "[gif-factory] FAIL: pip install pillow numpy scipy"
+"$VENV/bin/python" -m pip install --quiet --upgrade -r requirements.txt || {
+  echo "[gif-factory] FAIL: pip install -r requirements.txt"
   exit 1
 }
 
