@@ -72,7 +72,7 @@
       "upstream": "https://github.com/egoist/mygo-music",
       "upstreamCommit": "298c88a03407844ac1c4eb76e3590edfe4577121",
       "version": "go 1.27.3 toolchain; website: solid-js 2.0.3, @tanstack/solid-start 2.0.0-rc.10, Vite 8.3.8",
-      "license": "SEE LICENSE IN PACKAGE",
+      "license": "AGPL-3.0",
       "buildCmd": "cd packages/mygo-music && go build ./...",
       "testCmd": "cd packages/mygo-music && go vet ./... && go test ./internal/... && cd website && bun install && bun run build"
     }
