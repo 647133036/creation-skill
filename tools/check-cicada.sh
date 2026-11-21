@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# cicada check: Workers server unit tests + Swift package declaration sanity.
+# cicada check: Workers server unit tests, Swift package declaration sanity,
+# and the Linux engine (Python core + C voiceprint lib) under Python 3.15.
 set -u
 PY="$1"
 P="$PWD/packages/cicada"
@@ -17,10 +18,21 @@ node --test server/test/unit.test.mjs > /dev/null 2>&1 || {
 
 node --check server/src/index.js || fail=1
 
-# Linux engine (Python stdlib core): unit tests under Python 3.15.
+# The Linux engine: build the C voiceprint lib for this machine, run the
+# engine's unit tests and compile-check the GTK app under Python 3.15.
 cd "$P/linux" || exit 1
+native=linux/native/out
+if [ "$(uname)" = Darwin ]; then
+  native=linux/native/dylib
+fi
+"$P/linux/native/build.sh" "$P/$native" > /dev/null || {
+  echo "[cicada] FAIL: native voiceprint build"
+  fail=1
+}
+
 if "$PY" -m unittest discover -s tests -q > /tmp/cicada_linux_tests.log 2>&1; then
-  echo "[cicada] linux core: unittest PASS under $("$PY" --version 2>&1)"
+  tests=$("$PY" -m unittest discover -s tests 2>&1 | grep -oE 'Ran [0-9]+ tests' | head -1)
+  echo "[cicada] linux core: $tests PASS under $("$PY" --version 2>&1)"
 else
   echo "[cicada] linux core: unittest FAIL (see /tmp/cicada_linux_tests.log)"
   fail=1
