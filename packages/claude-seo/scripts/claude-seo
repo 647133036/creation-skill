@@ -18,7 +18,7 @@ fi
 # Supported range. runtime.py (MIN_PYTHON, MAX_PYTHON) is the source of
 # truth; tests/test_python_range.py keeps this copy and install.ps1 in step.
 min_minor=11
-max_minor=14
+max_minor=15
 
 # Prints major.minor for the interpreter given as arguments, or nothing.
 probe_version() {

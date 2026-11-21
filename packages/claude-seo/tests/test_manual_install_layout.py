@@ -27,7 +27,10 @@ def test_powershell_installer_copies_google_update_data_beside_scripts() -> None
 
 def test_runtime_import_validation_requires_html_clean_split_package() -> None:
     runtime = _text("scripts/runtime.py")
-    assert "import bs4, lxml, lxml_html_clean, playwright, requests, trafilatura" in runtime
+    assert (
+        "import bs4, google.ads.googleads.client, lxml, lxml_html_clean, "
+        "playwright, requests, trafilatura"
+    ) in runtime
 
 
 def test_google_updates_data_exists_at_installed_relative_path() -> None:

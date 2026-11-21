@@ -201,7 +201,7 @@
       "path": "packages/claude-seo",
       "language": "python",
       "python": ">=3.11",
-      "runtimeNotes": "29 SEO sub-skills + 20 specialist agents for Claude Code; verified on Python 3.15 (google-ads excluded: all releases <=35.1.0 declare Requires-Python <3.15, only powers optional seo-google keyword planner); pip install -r requirements.txt; CLAUDE_SEO_FULL=1 for pytest",
+      "runtimeNotes": "29 SEO sub-skills + 20 specialist agents for Claude Code; runtime range rewritten to 3.11-3.15 (upstream capped at 3.14 for google-ads whose wheels declare <3.15; google-ads 35.1.0 import-verified on 3.15.2, setup installs it via --ignore-requires-python); pip install -r requirements.txt; CLAUDE_SEO_FULL=1 for pytest",
       "upstream": "https://github.com/AgriciDaniel/claude-seo",
       "upstreamCommit": "468ed5b",
       "version": "claude-seo (plugin)",

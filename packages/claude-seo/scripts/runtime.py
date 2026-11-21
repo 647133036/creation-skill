@@ -25,10 +25,12 @@ from typing import Any
 
 RUNTIME_SCHEMA = 1
 # Supported interpreter range. scripts/claude-seo and install.ps1 repeat these
-# bounds, and tests/test_python_range.py keeps every copy in step. 3.15 waits
-# on google-ads, whose wheels declare Python < 3.15.
+# bounds, and tests/test_python_range.py keeps every copy in step. The cap is
+# 3.15: google-ads wheels declare Requires-Python < 3.15, but google-ads
+# 35.1.0 imports and works on 3.15.2, so setup installs it with
+# --ignore-requires-python and validates the import at the end.
 MIN_PYTHON = (3, 11)
-MAX_PYTHON = (3, 14)
+MAX_PYTHON = (3, 15)
 LOCK_STALE_SECONDS = 30 * 60
 SCRIPT_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*\.py$")
 EXTENSION_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
@@ -374,7 +376,19 @@ def command_setup(args: argparse.Namespace) -> int:
                 stage="pip bootstrap",
             )
             _run_checked(
-                [str(staged_python), "-m", "pip", "install", "--disable-pip-version-check", "-r", str(root / "requirements.txt")],
+                [
+                    str(staged_python),
+                    "-m",
+                    "pip",
+                    "install",
+                    "--disable-pip-version-check",
+                    # google-ads (<=35.1.0) declares Requires-Python < 3.15
+                    # but imports fine on 3.15; take responsibility for the
+                    # metadata bound here and validate the import below.
+                    "--ignore-requires-python",
+                    "-r",
+                    str(root / "requirements.txt"),
+                ],
                 env=env,
                 stage="dependency installation",
             )
@@ -392,7 +406,7 @@ def command_setup(args: argparse.Namespace) -> int:
                 [
                     str(staged_python),
                     "-c",
-                    "import bs4, lxml, lxml_html_clean, playwright, requests, trafilatura",
+                    "import bs4, google.ads.googleads.client, lxml, lxml_html_clean, playwright, requests, trafilatura",
                 ],
                 env=env,
                 stage="runtime import validation",

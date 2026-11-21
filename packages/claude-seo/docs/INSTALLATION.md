@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- **Python 3.11 to 3.14** with pip. Python 3.10 reached end of life in October 2026, and 3.15 waits on the Google Ads client library
+- **Python 3.11 to 3.15** with pip. Python 3.10 reached end of life in October 2026. google-ads wheels declare `Requires-Python < 3.15`, but 35.1.0 is import-verified on 3.15.2, so `/seo setup` installs it with `--ignore-requires-python` and validates the import
 - **Git** for cloning the repository
 - **Claude Code CLI** installed and configured
 

@@ -1,8 +1,10 @@
 """Supported Python range: one policy, enforced by every launcher (CI 2026-10-22).
 
-The Windows runner image gained Python 3.15, and ``py -3`` picked it even
-though google-ads does not support it yet. Every copy of the range must agree
-with ``runtime.py``, and the launcher must skip an unsupported default.
+The range now runs through 3.15: google-ads wheels declare
+``Requires-Python < 3.15``, but google-ads 35.1.0 is import-verified on
+3.15.2, so ``/seo setup`` installs it with ``--ignore-requires-python``.
+Every copy of the range must agree with ``runtime.py``, and the launcher
+must skip an unsupported default.
 """
 
 from __future__ import annotations
@@ -30,9 +32,9 @@ def _read(relative: str) -> str:
     return (ROOT / relative).read_text(encoding="utf-8")
 
 
-def test_runtime_range_is_three_eleven_to_three_fourteen() -> None:
+def test_runtime_range_is_three_eleven_to_three_fifteen() -> None:
     assert runtime.MIN_PYTHON == (3, 11)
-    assert runtime.MAX_PYTHON == (3, 14)
+    assert runtime.MAX_PYTHON == (3, 15)
 
 
 def test_every_copy_of_the_range_matches_runtime() -> None:
@@ -74,7 +76,7 @@ def test_setup_refuses_an_unsupported_interpreter(monkeypatch, capsys) -> None:
     monkeypatch.setattr(runtime, "_python_supported", lambda: False)
     monkeypatch.setattr(runtime, "_root", lambda: pytest.fail("setup must stop first"))
     assert runtime.command_setup(None) == 2
-    assert "needs Python 3.11 to 3.14" in capsys.readouterr().err
+    assert "needs Python 3.11 to 3.15" in capsys.readouterr().err
 
 
 posix_only = pytest.mark.skipif(os.name != "posix", reason="stub interpreters are shell scripts")
@@ -114,7 +116,7 @@ def _launch(bin_dir: Path, **env: str) -> subprocess.CompletedProcess:
 
 @posix_only
 def test_launcher_skips_unsupported_default_for_newest_supported(tmp_path) -> None:
-    bin_dir = _stub_dir(tmp_path, {"python3": "3.15", "python3.14": "3.14", "python3.12": "3.12"})
+    bin_dir = _stub_dir(tmp_path, {"python3": "3.16", "python3.14": "3.14", "python3.12": "3.12"})
     result = _launch(bin_dir)
     assert result.returncode == 0, result.stderr
     assert result.stdout.strip() == "picked python3.14 runtime.py"
@@ -128,16 +130,16 @@ def test_launcher_keeps_a_supported_default(tmp_path) -> None:
 
 @posix_only
 def test_launcher_names_the_range_when_nothing_fits(tmp_path) -> None:
-    bin_dir = _stub_dir(tmp_path, {"python3": "3.15", "python3.10": "3.10"})
+    bin_dir = _stub_dir(tmp_path, {"python3": "3.16", "python3.10": "3.10"})
     result = _launch(bin_dir)
     assert result.returncode == 2
-    assert "needs Python 3.11 to 3.14" in result.stderr
-    assert "3.15 (python3)" in result.stderr
+    assert "needs Python 3.11 to 3.15" in result.stderr
+    assert "3.16 (python3)" in result.stderr
 
 
 @posix_only
 def test_launcher_rejects_an_unsupported_override(tmp_path) -> None:
-    bin_dir = _stub_dir(tmp_path, {"python3": "3.12", "py315": "3.15"})
-    result = _launch(bin_dir, CLAUDE_SEO_PYTHON=str(bin_dir / "py315"))
+    bin_dir = _stub_dir(tmp_path, {"python3": "3.12", "py316": "3.16"})
+    result = _launch(bin_dir, CLAUDE_SEO_PYTHON=str(bin_dir / "py316"))
     assert result.returncode == 2
-    assert "CLAUDE_SEO_PYTHON must be Python 3.11 to 3.14. Found 3.15" in result.stderr
+    assert "CLAUDE_SEO_PYTHON must be Python 3.11 to 3.15. Found 3.16" in result.stderr

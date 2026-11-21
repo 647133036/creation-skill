@@ -12,7 +12,7 @@ Write-Host ""
 # Supported range. scripts/runtime.py (MIN_PYTHON, MAX_PYTHON) is the source
 # of truth; tests/test_python_range.py keeps this copy in step.
 $MinMinor = 11
-$MaxMinor = 14
+$MaxMinor = 15
 $script:SeenPython = @()
 
 function Resolve-Python {
