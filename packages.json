@@ -51,6 +51,45 @@
       "license": "MIT",
       "buildCmd": "true",
       "testCmd": "bash tools/check-claude-animated-shorts.sh"
+    },
+    {
+      "name": "rea-video",
+      "path": "packages/rea-video",
+      "language": "python",
+      "python": ">=3.10",
+      "runtimeNotes": "requires numpy, opencv-python-headless, Pillow, PyYAML, videomd; onnxruntime (audio) optional on Py 3.15; ffmpeg on PATH",
+      "upstream": "https://github.com/JuneYaooo/rea-video",
+      "upstreamCommit": "4d98dd8",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-rea-video.sh"
+    },
+    {
+      "name": "craft-anything",
+      "path": "packages/craft-anything",
+      "language": "rust",
+      "rust": ">=1.97",
+      "runtimeNotes": "cargo check for CI; full build needs Rust 1.97+ and (for desktop app) libgtk-3-dev; CLI + MCP server + agent skill",
+      "upstream": "https://github.com/storytold/craft-anything",
+      "upstreamCommit": "e64d7cb",
+      "version": "0.2.0",
+      "license": "MIT OR Apache-2.0",
+      "buildCmd": "cd packages/craft-anything && cargo build --release -p craft-anything-cli",
+      "testCmd": "bash tools/check-craft-anything.sh"
+    },
+    {
+      "name": "unlose",
+      "path": "packages/unlose",
+      "language": "csharp",
+      "dotnet": "8.0",
+      "runtimeNotes": "Windows-only (VSS snapshots + WPF UI + .NET service); builds on Windows with dotnet 8 SDK; source-verified on Linux",
+      "upstream": "https://github.com/unlose-app/unlose",
+      "upstreamCommit": "3a6b005",
+      "version": "1.1.1",
+      "license": "Apache-2.0",
+      "buildCmd": "cd packages/unlose/src && dotnet build Unlose.sln -c Release",
+      "testCmd": "bash tools/check-unlose.sh"
     }
   ]
 }
