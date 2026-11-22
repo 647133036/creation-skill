@@ -10,8 +10,14 @@ if ! command -v cargo >/dev/null 2>&1; then
 fi
 
 cd "$PKG"
-if ! cargo check --quiet 2>&1 | tail -5; then
+# Capture cargo's exit code explicitly: a bare pipeline into `tail` would mask
+# failures (tail exits 0), so we would report PASS on a broken build.
+CARGO_OUT="$(cargo check --quiet 2>&1)"
+CARGO_RC=$?
+if [ "$CARGO_RC" -ne 0 ]; then
+  printf '%s\n' "$CARGO_OUT" | tail -5
   echo "[craft-anything] FAIL: cargo check"
   exit 1
 fi
+[ -n "$CARGO_OUT" ] && printf '%s\n' "$CARGO_OUT" | tail -5
 echo "[craft-anything] PASS: cargo check clean"

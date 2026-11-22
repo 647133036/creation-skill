@@ -15,8 +15,13 @@ if ! command -v dotnet >/dev/null 2>&1; then
 fi
 
 cd "$PKG/src"
-if ! dotnet build Unlose.sln -c Release --nologo 2>&1 | tail -5; then
+# Capture dotnet's exit code explicitly; a pipeline into tail would mask failures.
+BUILD_OUT="$(dotnet build Unlose.sln -c Release --nologo 2>&1)"
+BUILD_RC=$?
+if [ "$BUILD_RC" -ne 0 ]; then
+  printf '%s\n' "$BUILD_OUT" | tail -5
   echo "[unlose] FAIL: dotnet build"
   exit 1
 fi
+printf '%s\n' "$BUILD_OUT" | tail -5
 echo "[unlose] PASS: dotnet build clean"

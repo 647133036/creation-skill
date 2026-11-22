@@ -5,9 +5,8 @@ PKG="$1"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 case "$PKG" in
-  mygo-music)
-    cd "$ROOT/packages/mygo-music" && go build ./... && echo "[mygo-music] build OK"
-    ;;
+  # No package in the monorepo has a dedicated build step today. When one is
+  # added, wire its real build command here.
   *)
     echo "[$PKG] build: no separate build step (script/doc package)"
     ;;

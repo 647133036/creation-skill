@@ -30,7 +30,12 @@ fi
 
 cd "$PKG"
 # Use the project's own typescript (7.0.2 via npx -p); NODE_OPTIONS raises heap.
-if NODE_OPTIONS="--max-old-space-size=$NODE_MEM" npx --yes -p typescript@7.0.2 tsc --noEmit -p tsconfig.json 2>&1 | tail -10; then
+# Capture tsc's own exit code: piping straight to `tail` would mask tsc's status
+# (the pipeline then always reports success), so run tsc into a variable first.
+TSC_OUT="$(NODE_OPTIONS="--max-old-space-size=$NODE_MEM" npx --yes -p typescript@7.0.2 tsc --noEmit -p tsconfig.json 2>&1)"
+TSC_RC=$?
+printf '%s\n' "$TSC_OUT" | tail -10
+if [ "$TSC_RC" -eq 0 ]; then
   echo "[rea] PASS: tsc --noEmit clean"
 else
   # tsc errors may be pre-existing in upstream; treat as soft pass with note

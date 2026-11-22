@@ -110,10 +110,11 @@ def test_requires_python_is_capped_below_an_unsupported_interpreter():
     """requires-python must keep an upper bound so uv/pip never auto-select a
     Python newer than our C-extension deps ship wheels for (#5134).
 
-    Without the cap, `uv tool install graphifyy` on a fresh machine installs the
-    newest cpython (e.g. 3.15), tree-sitter has no wheel for it, pip falls back to
-    a source build, and the install dies with `No such file or directory: 'cc'`.
-    The cap makes uv/pip pick a wheel-having interpreter (3.14) by default.
+    The cap tracks the newest interpreter with published wheels. cp315 wheels
+    exist for the tree-sitter family (every grammar wheel installs from the
+    index on CPython 3.15), so 3.15 is the supported ceiling; 3.16+ has no
+    wheels yet, where pip would fall back to a source build and die with
+    `No such file or directory: 'cc'` on a machine without a toolchain.
     """
     from packaging.specifiers import SpecifierSet
 
@@ -121,7 +122,11 @@ def test_requires_python_is_capped_below_an_unsupported_interpreter():
     assert "<" in spec, f"requires-python must keep an upper bound (#5134): {spec!r}"
     allowed = SpecifierSet(spec)
     assert "3.14" in allowed, f"requires-python must still allow 3.14: {spec!r}"
-    assert "3.15" not in allowed, (
-        f"requires-python must exclude 3.15 — tree-sitter has no cp315 wheel, so a "
-        f"fresh install would source-build and need a C compiler (#5134): {spec!r}"
+    assert "3.15" in allowed, (
+        f"requires-python must allow 3.15 — tree-sitter ships cp315 wheels, "
+        f"so 3.15 is a supported interpreter (#5134, cap raised): {spec!r}"
+    )
+    assert "3.16" not in allowed, (
+        f"requires-python must exclude 3.16 — no cp316 wheel yet, a fresh "
+        f"install would source-build and need a C compiler (#5134): {spec!r}"
     )

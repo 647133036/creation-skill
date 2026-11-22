@@ -20,12 +20,19 @@ if [ "$SKILLS" -lt 1 ]; then
   exit 1
 fi
 
-# Validate workspace manifests without installing
-if ! bun run --silent node -e "JSON.parse(require('fs').readFileSync('$PKG/package.json','utf8'))" 2>/dev/null; then
-  if ! bunx -s node -e "JSON.parse(require('fs').readFileSync('$PKG/package.json','utf8'))" 2>/dev/null; then
+# Validate workspace manifests without installing.
+# Prefer `node -e` (Node 22 is the suite baseline); fall back to `bun -e`.
+# (Avoids the fragile `bun run node -e` / `bunx -s` invocations, which depend
+# on the bunx alias and on node being resolvable through `bun run`.)
+JSON_PROBE='JSON.parse(require("fs").readFileSync(process.env.HF_PKG,"utf8"))'
+if command -v node >/dev/null 2>&1; then
+  if ! HF_PKG="$PKG/package.json" node -e "$JSON_PROBE" 2>/dev/null; then
     echo "[hyperframes] FAIL: root package.json not valid JSON"
     exit 1
   fi
+elif ! HF_PKG="$PKG/package.json" bun -e "$JSON_PROBE" 2>/dev/null; then
+  echo "[hyperframes] FAIL: root package.json not valid JSON"
+  exit 1
 fi
 
 RUN_TESTS=0

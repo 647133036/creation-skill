@@ -256,8 +256,9 @@ func TestGetDiff_CommitFailureSurfacesGitMessage(t *testing.T) {
 	// opens with 致命错误, so asserting "fatal:" would pass in CI's English // allow-non-english: names the translated prefix this assertion must not depend on
 	// container and fail for a translated developer. The SHA is the one part
 	// no locale rewrites, and its presence is what proves git's message came
-	// through at all. isNotGitRepoError pairs its English phrase with a
-	// locale-proof check for the same reason.
+	// through at all. isNotGitRepoError decides the --no-index retry by
+	// filesystem (.git presence) instead of matching git's localized prose,
+	// for the same reason: locale must not change the behavior.
 	if !strings.Contains(got, missingSHA) {
 		t.Errorf("error %q carries no message from git; only the exit status survived", got)
 	}

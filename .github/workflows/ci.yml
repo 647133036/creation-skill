@@ -46,8 +46,12 @@ jobs:
         run: |
           curl -sL -o /tmp/ffmpeg.tar.xz \
             "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n9.0-latest-linux64-gpl-9.0.tar.xz"
-          tar -xf /tmp/ffmpeg.tar.xz
-          sudo cp ffmpeg-n9.0-linux64-gpl-9.0/bin/ff* /usr/local/bin/
+          tar -xf /tmp/ffmpeg.tar.xz -C /tmp
+          # BtbN's -latest asset extracts to ffmpeg-n9.0-latest-linux64-gpl-9.0/
+          # (note the "latest" segment); resolve it via glob so minor renames
+          # of the extracted dir don't break the step.
+          sudo cp /tmp/ffmpeg-n9.0-*-linux64-gpl-9.0/bin/ff* /usr/local/bin/
+          ffmpeg -version | head -1 && ffprobe -version | head -1
       - name: Install Rust
         if: matrix.package == 'craft-anything' || matrix.package == 'impeccable'
         uses: dtolnay/rust-toolchain@stable
@@ -62,6 +66,10 @@ jobs:
       - name: Install Go
         if: matrix.package == 'open-code-review'
         run: |
-          # go.mod requires go 1.26; GOTOOLCHAIN=auto handles fetching during check
+          # go.mod declares `go 1.26.10`; install that exact toolchain so the
+          # check's `go vet` path runs without a GOTOOLCHAIN download.
+          curl -sL -o /tmp/go.tgz "https://dl.google.com/go/go1.26.10.linux-amd64.tar.gz"
+          sudo tar -C /usr/local -xzf /tmp/go.tgz
+          echo "/usr/local/go/bin" >> "$GITHUB_PATH"
       - name: Check ${{ matrix.package }}
         run: bash tools/check-package.sh "${{ matrix.package }}" /opt/python3.15/bin/python3

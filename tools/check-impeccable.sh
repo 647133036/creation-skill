@@ -27,16 +27,14 @@ if ! grep -q "\[workspace\]" "$PKG/Cargo.toml" 2>/dev/null; then
   exit 1
 fi
 
-CARGO_STATUS=0
-if command -v cargo >/dev/null 2>&1; then
-  if ! (cd "$PKG" && cargo metadata --no-deps --format-version 1 >/dev/null 2>&1); then
-    echo "[impeccable] FAIL: cargo metadata invalid"
-    CARGO_STATUS=1
-  fi
-fi
-
-if [ "$CARGO_STATUS" -eq 0 ]; then
-  echo "[impeccable] PASS: skill entry + Cargo workspace valid"
-else
+# Three states: SKIP when cargo is absent (manifest-only check), FAIL when
+# cargo exists but the workspace metadata is invalid, PASS otherwise.
+if ! command -v cargo >/dev/null 2>&1; then
   echo "[impeccable] SKIP: cargo not available (manifest check only)"
+  exit 0
 fi
+if ! (cd "$PKG" && cargo metadata --no-deps --format-version 1 >/dev/null 2>&1); then
+  echo "[impeccable] FAIL: cargo metadata invalid"
+  exit 1
+fi
+echo "[impeccable] PASS: skill entry + Cargo workspace valid"

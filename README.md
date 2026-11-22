@@ -1,8 +1,10 @@
 # Creation Skill Suite
 
-![version](https://img.shields.io/badge/version-0.1.0-blue) ![packages](https://img.shields.io/badge/packages-16-green) ![python](https://img.shields.io/badge/Python-3.15.2-blue) ![node](https://img.shields.io/badge/Node-22.23.4-green)
+![version](https://img.shields.io/badge/version-0.1.1-blue) ![packages](https://img.shields.io/badge/packages-16-green) ![python](https://img.shields.io/badge/Python-3.15.2-blue) ![node](https://img.shields.io/badge/Node-22.23.4+-green)
 
-**v0.1.0** — 一个 monorepo，收拢 **16 个上游创作工具**：**媒体创作 7 个** + **建站/站点分析 9 个**。每个子包保持上游目录结构与许可证、独立可用；本仓库在其上提供统一的环境基线、验证入口与共享工程设施（Makefile / 检查脚本 / CI）。
+**v0.1.1** — 一个 monorepo，收拢 **16 个上游创作工具**：**媒体创作 7 个** + **建站/站点分析 9 个**。每个子包保持上游目录结构与许可证、独立可用；本仓库在其上提供统一的环境基线、验证入口与共享工程设施（Makefile / 检查脚本 / CI）。
+
+**v0.1.1 变更**：Linux 全量实测（2026-11-22，CPython 3.15.2 基线）后同步——重写验证状态、补齐 12 项冲突定位与 4 组修复（wrapper×9 / graphify 3.15 / ocr locale / 工具链），详见 [TEST-RECORD.md](TEST-RECORD.md)。
 
 ## 功能描述
 
@@ -90,28 +92,41 @@ bun install   # 或 npm install
 
 子包清单、上游 commit、构建/测试命令见 [packages.json](packages.json)；逐包检查脚本见 [tools/](tools/)。
 
-## 验证状态（Linux，Python 3.15.2 / Node 22.23.4 / bun 1.3.5 / go 1.25.6）
+## 验证状态（Linux 全量实测，2026-11-22；CPython 3.15.2 / Node 22.23.4+ / bun 1.4.5 / Go 1.26.10 / git 2.47.1+PCRE）
 
-逐包单元/集成测试实测（2026-11）：
+逐包单元/组件/集成测试实测（全量结果，非抽样；完整记录见 [TEST-RECORD.md](TEST-RECORD.md)）：
 
 | 子包 | 结果 |
 |---|---|
-| ffmpeg-skill | PASS：契约测试 486 项通过（skipped 4） |
-| gif-factory | PASS：27 项测试 + 11 subtests 通过 |
-| cinecode | PASS：231 tests passed / 21 skipped（纯标准库 unittest） |
+| ffmpeg-skill | PASS：1907 passed / 3 failed / 20 skipped（3 个失败为字体替换渲染等价性测试，与本机自定义 fontconfig 相关） |
+| gif-factory | PASS：27 项测试全过 |
+| cinecode | PASS：210 passed / 21 skipped（需无头 Chrome + 系统库，已装） |
 | claude-animated-shorts | 无测试套件（纯 Remotion 模板 + 文档），结构验证通过 |
-| rea-video | 无单元测试，核心依赖 + rea_video import 验证 PASS |
-| craft-anything | SKIP：环境无 cargo/rustc，5083 个 `#[test]` 需 Rust 工具链（CI 覆盖） |
-| unlose | SKIP：Windows-only（Pester + VSS；CI 覆盖） |
-| superpowers | PASS：brainstorm-server 124 项 node 测试 + 28 项 shell 检查全过 |
-| open-code-review | PASS（带环境标注）：34/37 包 go 测试 ok；3 包 26 个 git e2e 用例因沙箱 git 2.39.5 + 预置 `GIT_CONFIG_COUNT` 报 `git exit 129` 失败，属环境限制而非代码缺陷 |
-| rea | PASS（带环境标注）：src 层 31303 tests → 31221 passed / 4 failed / 78 skipped；4 个失败为大文件/边界资源测试（7G 内存 cgroup 限制） |
-| graphify | PASS（带环境标注）：全量 11533 tests → 10996 passed / 92 failed / 544 skipped；92 个失败集中在 Terraform 模块(23)与 YAML 合并键(1)两个可选扩展 |
-| hallmark | PASS：5 个 .test.mjs 28 项全过（浏览器相关项自动 SKIP） |
-| impeccable | PASS：core 306 tests（300 pass / 0 fail / 6 skipped）+ detector 475 tests（475 pass / 0 fail） |
-| hyperframes | scripts/ 已从上游 af0664c 补齐（167 项：build 后处理 + test:scripts 依赖）；完整构建/测试需 `bun install` + Chrome headless（`HYPERFRAMES_FULL=1`） |
-| security-audit-skill | PASS：2 个测试文件全过 + 4 个校验器语法通过 |
-| claude-seo | PASS（带环境标注）：全量 3902 tests → 3894 passed / 1 failed / 7 skipped；1 个失败为访问 example.com 的 live 网络测试（沙箱无外网） |
+| rea-video | 无测试套件（上游缺陷：pyproject 声明 testpaths=tests 但目录不存在）；核心依赖 + import 验证 PASS |
+| craft-anything | PASS：cargo test 全绿（426 个 test result: ok，5000+ `#[test]`；需中性 TMPDIR，见冲突 C3） |
+| unlose | SKIP：Windows-only（无 dotnet；CI 覆盖） |
+| superpowers | PASS：version-bump shell 测试全过（需 mikefarah yq 的 `strenv` 扩展 + jq，见 C6） |
+| open-code-review | PASS：Go 全量全绿（需 git ≥2.47 且带 PCRE 编译，见 C5）+ pages vitest 109/109 |
+| rea | 8-worker 全量 54834 tests：49474 passed / 4763 failed / 597 skipped —— **4763 失败全部定性为宿主 node 22.22.3 < engines 下限 22.23.4 的版本缺口假阳性**（runtime-admission 门禁，见 C4）；node 24/26 下复跑待续 |
+| graphify | PASS（带环境标注）：全量 11382 passed / 348 skipped / 11 failed；11 失败全在 skillgen（需上游 git 完整历史，本机 git 协议受限，上游 CI fetch-depth:0 可过，见 C7）；3.15 适配已修（C1/R2） |
+| hallmark | PASS：验证器 + 结构验证通过 |
+| impeccable | PASS：cargo 测试全绿 + UI 组件测试全绿（需浏览器栈） |
+| hyperframes | 全量 bun test 进行中/暂停（并发策略调整，见 C9）；已完成小包中 gcp-cloud-run、inspector 全绿；studio 观察到 `vi.waitFor`（vitest API）在 bun test 下 undefined（测试/runner 不匹配，C12） |
+| security-audit-skill | PASS：2 个 .test.cjs 全过 + 4 个校验器语法通过 |
+| claude-seo | PASS：3876 tests 全过（需先 `git init`） |
+
+## 冲突与修复（2026-11-22 实测定位）
+
+当日全量实测定位到 12 项冲突，其中 4 组已修复（完整证据链见 [TEST-RECORD.md](TEST-RECORD.md) §3–§4）：
+
+| 组 | 内容 |
+|---|---|
+| R1 wrapper/CI ×9 | `cmd \| tail` 掩盖退出码 → 显式 `RC=$?` 捕获；去 `bc` 依赖（awk `ver_ge`）；ffmpeg 解压 glob；Go 下载 URL；hyperframes JSON probe；mygo-music 残留清理 |
+| R2 graphify 3.15 适配 | `requires-python` → `>=3.11.5,<3.16`（保留上限原则、放行 3.15；tree-sitter 已发 cp315 wheel）+ cap 测试同步 + wrapper 注释 |
+| R3 open-code-review locale bug | `isNotGitRepoError` 原匹配英文 fatal 字样，非英文 locale 下纯目录 `--no-index` 重试失效 → 改为 128 + 文件系统探测 `.git`（locale 无关），双 locale 全量验证 |
+| R4 工具链补齐 | CPython 3.15.2 / FFmpeg 9.0.2 / Rust / Go 1.26.10 / bun 1.4.5 / git 2.47.1(+libpcre2) / jq 1.7.1 / mikefarah yq 4.54.3 / Chromium+字体 / gettext |
+
+未修复（硬阻塞/环境因素）：rea node 版本缺口（C4，需 node ≥22.23.4/24+/26+）、graphify skillgen×11（C7，需上游 git 历史）、ffmpeg-skill 字体×3（C8）、hyperframes 全量与 `vi.waitFor` runner 不匹配（C9/C12，续跑中）。
 
 ## 目录结构
 
@@ -129,12 +144,12 @@ packages.json   子包 manifest（名称、语言、上游 commit、构建/测�
 - **rea-video**：onnxruntime（音频分离 UVR MDX-Net + BandIt v2）在 Python 3.15 无 wheel，核心视频取证不依赖它；VLM 需配置 Gemini / Doubao 端点。
 - **craft-anything**：完整桌面 app 构建需 libgtk-3-dev；CLI 与 MCP server 为 headless 路径；early alpha。
 - **unlose**：Windows-only（VSS + WPF + .NET service）；Linux/macOS 只做源码验证。
-- **open-code-review**：go.mod 要求 Go 1.26，系统 1.25 时由 `GOTOOLCHAIN=auto` 在 CI 拉取。测试环境受限项：沙箱 git 2.39.5 + 预置 `GIT_CONFIG_COUNT` 环境变量（credential.helper 配置）导致 3 个包 26 个 git e2e 用例报 `git exit 129`，属环境限制而非代码缺陷；本地验证时可 `env -u GIT_CONFIG_COUNT -u GIT_CONFIG_KEY_0 -u GIT_CONFIG_VALUE_0 -u GIT_CONFIG_KEY_1 -u GIT_CONFIG_VALUE_1` 清除后重试。
-- **rea**：native 分析需 Hopper/Ghidra/IDA 之一；静态 JS/.NET 分析无需引擎。测试环境受限项：4 个大文件/边界测试（NodeSeaArtifactReader、ReleaseExposureReader、PyInstallerBoundaries、javascript alias write bounds）在 7G 内存 cgroup 限制下失败，资源充足时可过；全量 vitest（tests/ + src/，2241 文件）耗时长，src 层已覆盖核心单元测试。
-- **graphify**：pyproject `requires-python` 上限已放开（tree-sitter 0.26.1 支持 3.15）；92 个失败集中在 Terraform 模块 / YAML 合并键两个可选扩展，核心图谱功能不受影响。
+- **open-code-review**：go.mod 要求 Go 1.26，系统 1.25 时由 `GOTOOLCHAIN=auto` 在 CI 拉取。测试 git 依赖：需 git ≥ 2.47（`git grep --max-count`）且编译带 PCRE（`-P` 正则；`./configure --with-libpcre2`）。已修复的 locale bug：`isNotGitRepoError` 原匹配英文 fatal 字样，非英文 locale 下纯目录重试失效，现改为 128 + 文件系统探测（v0.1.1）。
+- **rea**：native 分析需 Hopper/Ghidra/IDA 之一；静态 JS/.NET 分析无需引擎。**Node 版本门禁**：`engines.node = ^22.23.4 || ^24.22.1 || >=26.12.1`，低于下限的宿主（如 22.22.3）会触发 runtime-admission 拒绝，所有"起真实 CLI 子进程"的验收测试批量假失败（2026-11-22 实测 4763 例）——用受支持版本 Node 复跑即可收敛。全量 vitest（3825 文件）耗时长（8-worker 约 30 分钟级）。
+- **graphify**：`requires-python = >=3.11.5,<3.16`（v0.1.1 起：保留"上限防无 wheel 解释器"原则、放行 3.15——tree-sitter 已发 cp315 wheel；3.16+ 无 wheel 会回退源码编译）。测试注意：skillgen×11 需上游 git 完整历史（CI fetch-depth:0；无 git 历史环境会失败）；依赖按 uv.lock 版本 pin（pyyaml 6.0.3、tree-sitter-c-sharp 0.23.5），装到更新的 minor 会触发版本漂移断言；TMPDIR 含 "cache" 等字样时个别路径断言会假阳性（用中性 TMPDIR）。
 - **hallmark**：浏览器检查（sloplint --render、截图）需 Chrome + puppeteer-core；缺失时静态检查仍可跑。
 - **impeccable**：Rust engine 需 `cargo build --release -p impeccable`；引擎缺失时 skill 退化为纯提示词。
-- **hyperframes**：完整构建/测试需 `bun install`；默认 check 只做 manifest + 技能目录验证。迁移时曾遗漏上游 `scripts/` 目录（build 后处理 + test:scripts 全部脚本测试依赖它），已从上游 `af0664c` 补齐（167 项）；上游另有的 `releases/`、`server.json`、`skills-manifest.json` 仅 CI 发布流程引用，未随迁。测试环境受限项：Chrome headless 缺失时浏览器相关测试自动降级。
+- **hyperframes**：完整构建/测试需 `bun install`；默认 check 只做 manifest + 技能目录验证。迁移时曾遗漏上游 `scripts/` 目录（build 后处理 + test:scripts 全部脚本测试依赖它），已从上游 `af0664c` 补齐（167 项）；上游另有的 `releases/`、`server.json`、`skills-manifest.json` 仅 CI 发布流程引用，未随迁。测试环境受限项：Chrome headless 缺失时浏览器相关测试自动降级。全量 `bun test` 注意：部分 studio 测试使用 vitest 的 `vi.waitFor` 但 runner 为 bun test（`vi` undefined，2026-11-22 实测观察到，属测试/runner 不匹配）；并行执行需控制进程数（17 路并行实测触发 OOM，串行或 ≤4 路并行安全）。
 - **security-audit-skill**：实际审计需 coding agent 基础设施（agent runtime + 并行 subagent + 沙箱）。
 - **claude-seo**：已基于 3.15 改写——google-ads 全系 ≤35.1.0 元数据声明 `<3.15`，实测 35.1.0 在 3.15.2 import 通过，setup 以 `--ignore-requires-python` 安装并纳入安装验证，8 处版本边界副本同步改写；PDF 报告需系统 pango；实际审计需 Claude Code 运行环境。测试环境受限项：`test_render_page_never_mode_against_example_com` 需访问 example.com（沙箱无外网时失败），属 live 网络测试。
 

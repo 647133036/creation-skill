@@ -7,6 +7,19 @@ set -u
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PKG="$ROOT/packages/open-code-review"
 
+# ver_ge A B: exit 0 when version A >= B. Pure awk so the check has no
+# hidden dependency on bc (host may not have it installed).
+ver_ge() {
+  awk -v a="$1" -v b="$2" 'BEGIN{
+    n=split(a,x,"."); m=split(b,y,".");
+    for(i=1;i<=(n>m?n:m);i++){
+      A=(i<=n?x[i]+0:0); B=(i<=m?y[i]+0:0);
+      if(A>B) exit 0; if(A<B) exit 1
+    }
+    exit 0
+  }'
+}
+
 if [ ! -d "$PKG" ]; then
   echo "[open-code-review] FAIL: missing $PKG"
   exit 1
@@ -33,13 +46,19 @@ fi
 # If go toolchain is available at >= 1.26, run go vet for a real check
 if command -v go >/dev/null 2>&1; then
   GO_VER=$(go version | sed 's/.*go\([0-9.]*\).*/\1/')
-  # Compare: is GO_VER >= 1.26?
-  if [ "$(echo "$GO_VER >= 1.26" | bc -l 2>/dev/null || echo 0)" = "1" ]; then
+  # Compare: is GO_VER >= 1.26? (awk helper, no bc dependency)
+  if ver_ge "$GO_VER" "1.26"; then
     cd "$PKG"
-    if go vet ./... 2>&1 | tail -8; then
+    # Capture go vet's exit code explicitly; a pipeline into tail would mask
+    # failures and report PASS on a broken tree.
+    VET_OUT="$(go vet ./... 2>&1)"
+    VET_RC=$?
+    if [ "$VET_RC" -eq 0 ]; then
+      [ -n "$VET_OUT" ] && printf '%s\n' "$VET_OUT" | tail -8
       echo "[open-code-review] PASS: go vet clean ($GO_VER)"
       exit 0
     fi
+    printf '%s\n' "$VET_OUT" | tail -8
     echo "[open-code-review] FAIL: go vet"
     exit 1
   else

@@ -8,7 +8,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -163,7 +165,7 @@ func (p *CodeSearchProvider) gitGrep(ctx context.Context, searchText string, cas
 	// `ocr scan` supports plain directories, so retry in --no-index mode, which
 	// searches the working tree directly while still honoring .gitignore.
 	// Ref-based search needs a real repo, so it is not retried.
-	if err != nil && p.FileReader.Ref == "" && isNotGitRepoError(err, errStr) {
+	if err != nil && p.FileReader.Ref == "" && isNotGitRepoError(err, p.FileReader.RepoDir) {
 		cmdArgs = p.buildGrepArgs(searchText, caseSensitive, usePerlRegexp, true, pathspec)
 		outStr, errStr, err = p.runGitGrep(ctx, cmdArgs)
 	}
@@ -275,11 +277,37 @@ func trimGitUsage(stderr string, exitCode int) string {
 	return strings.TrimSpace(stderr)
 }
 
-func isNotGitRepoError(err error, stderr string) bool {
+// isNotGitRepoError reports whether a 128 fatal came from running in a
+// directory that is not a git repository, i.e. whether the --no-index
+// retry in gitGrep is safe.
+//
+// The verdict is filesystem-based, not prose-based: git localizes its
+// "not a git repository" fatal (zh_CN: 致命错误：不是 git 仓库…, ja: …),
+// and that message carries no ".git" literal, so matching the English
+// phrase or ".git" only ever worked under C/English locales. This is only
+// consulted for Ref == "" (workspace mode): a .git dir/file at or above
+// repoDir means a real repository, where a 128 is a genuine fatal that
+// must surface; without one, the dir is plain and the --no-index retry is
+// the right answer.
+func isNotGitRepoError(err error, repoDir string) bool {
 	var exitErr *exec.ExitError
-	if errors.As(err, &exitErr) && exitErr.ExitCode() == 128 &&
-		(strings.Contains(stderr, "not a git repository") || strings.Contains(stderr, ".git")) {
-		return true
+	if !errors.As(err, &exitErr) || exitErr.ExitCode() != 128 {
+		return false
 	}
-	return false
+	return !hasGitDir(repoDir)
+}
+
+// hasGitDir walks up from dir looking for a .git directory (or the .git
+// file that worktrees/submodules use).
+func hasGitDir(dir string) bool {
+	for {
+		if _, err := os.Stat(filepath.Join(dir, ".git")); err == nil {
+			return true
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			return false
+		}
+		dir = parent
+	}
 }
