@@ -1,8 +1,10 @@
 # Creation Skill Suite
 
-![version](https://img.shields.io/badge/version-0.1.1-blue) ![packages](https://img.shields.io/badge/packages-16-green) ![python](https://img.shields.io/badge/Python-3.15.2-blue) ![node](https://img.shields.io/badge/Node-22.23.4+-green)
+![version](https://img.shields.io/badge/version-0.1.2-blue) ![packages](https://img.shields.io/badge/packages-17-green) ![python](https://img.shields.io/badge/Python-3.15.2-blue) ![node](https://img.shields.io/badge/Node-22.23.4+-green)
 
-**v0.1.1** — 一个 monorepo，收拢 **16 个上游创作工具**：**媒体创作 7 个** + **建站/站点分析 9 个**。每个子包保持上游目录结构与许可证、独立可用；本仓库在其上提供统一的环境基线、验证入口与共享工程设施（Makefile / 检查脚本 / CI）。
+**v0.1.2** — 一个 monorepo，收拢 **17 个上游创作工具**：**媒体创作 7 个** + **建站/站点分析 10 个**。每个子包保持上游目录结构与许可证、独立可用；本仓库在其上提供统一的环境基线、验证入口与共享工程设施（Makefile / 检查脚本 / CI）。
+
+**v0.1.2 变更**：纳入 [ai-website-cloner-template](packages/ai-website-cloner-template)（39.6k star，agent skill 网站克隆器 + Next.js 16 脚手架）为第 17 个子包。
 
 **v0.1.1 变更**：Linux 全量实测（2026-11-22，CPython 3.15.2 基线）后同步——重写验证状态、补齐 12 项冲突定位与 4 组修复（wrapper×9 / graphify 3.15 / ocr locale / 工具链），详见 [TEST-RECORD.md](TEST-RECORD.md)。
 
@@ -12,7 +14,7 @@
 
 1. **媒体创作（7 包）**：视频/音频编辑（ffmpeg-skill）、动态图与海报（gif-factory）、代码生成电影（cinecode）、动画短片（claude-animated-shorts）、视频逆向拆解（rea-video）、软件逆向重建（craft-anything）、agent 数据防护（unlose）。
 2. **建站 / 站点分析（9 包）**：开发方法论技能集（superpowers）、AI 代码审查（open-code-review）、逆向工程 MCP 框架（rea）、代码知识图谱（graphify）、反 AI 套路设计（hallmark）、设计语言引擎（impeccable）、HTML→视频（hyperframes）、安全审计编排（security-audit-skill）、SEO 审计（claude-seo）。
-3. **统一工程设施**：全部 Python 子包统一跑在 **CPython 3.15.2**（claude-seo 为此做了基于 3.15 的改写）；`make check` 一键验证 16 个子包，结果为 `PASS` / `SKIP(原因)` / `FAIL` 三态；上游 commit、构建/测试命令记录在 [packages.json](packages.json)。
+3. **统一工程设施**：全部 Python 子包统一跑在 **CPython 3.15.2**（claude-seo 为此做了基于 3.15 的改写）；`make check` 一键验证 17 个子包，结果为 `PASS` / `SKIP(原因)` / `FAIL` 三态；上游 commit、构建/测试命令记录在 [packages.json](packages.json)。
 
 ### 媒体创作（7）
 
@@ -26,7 +28,7 @@
 | [craft-anything](packages/craft-anything) | 软件逆向重建引擎：看懂任意网站/应用/游戏怎么做的，再用 coding agent 在你的目标栈里重建。320 工具 + CLI + MCP server。 | Rust 1.97+ + wgpu + egui | MIT / Apache-2.0 | storytold/craft-anything |
 | [unlose](packages/unlose) | AI agent 数据防护：agent 开工前自动做全盘 VSS 快照，删错/损坏/加密后拖时间线恢复。 | C# / .NET 8 + WPF + Windows VSS | Apache-2.0 | unlose-app/unlose |
 
-### 建站 / 站点分析（9）
+### 建站 / 站点分析（10）
 
 | 子包 | 能做什么 | 技术栈 | 许可证 | 上游 |
 |---|---|---|---|---|
@@ -39,6 +41,7 @@
 | [hyperframes](packages/hyperframes) | agent 原生 HTML→视频框架：HTML/CSS + 可寻址动画写成确定性 MP4。9 个技能路由 + bun 多包 monorepo。 | TypeScript (bun workspaces) + Node | Apache-2.0 | heygen-com/hyperframes |
 | [security-audit-skill](packages/security-audit-skill) | 6 阶段安全审计编排技能（Cloudflare）：侦察→覆盖驱动狩猎→候选验证→结构化输出→独立记录核验→目标中性报告。 | markdown + JS（零依赖） | MIT | cloudflare/security-audit-skill |
 | [claude-seo](packages/claude-seo) | 通用 SEO 审计插件：29 子技能 + 20 专家 agent 覆盖技术 SEO / E-E-A-T / Schema.org / AI 搜索(GEO/AEO) / 本地 / 电商 / 国际化 / Google API / PDF+Excel 报告。 | Python 3.11–3.15 + pytest | MIT | AgriciDaniel/claude-seo |
+| [ai-website-cloner-template](packages/ai-website-cloner-template) | agent skill 网站克隆器：`/clone-website` 一条命令把任意网站重建为干净可编辑的 Next.js 代码。四步流程（Map 路由 → Observe 浏览器观察/提取真实资源 → Build 组件 → Compare 对照修复），含 Framer/动效站专门指引。 | Next.js 16 + React 19 + TS strict + shadcn/ui + Tailwind v4 | MIT | JCodesMore/ai-website-cloner-template |
 
 ## 依赖描述
 
@@ -67,7 +70,7 @@
 ### 一键验证 / 构建
 
 ```bash
-make check          # 验证全部 16 个子包（build + smoke/test）
+make check          # 验证全部 17 个子包（build + smoke/test）
 make check-<pkg>    # 验证单个子包，如 make check-hallmark
 make build          # 构建全部子包
 make build-<pkg>    # 构建单个子包
@@ -114,6 +117,7 @@ bun install   # 或 npm install
 | hyperframes | 全量 bun test 进行中/暂停（并发策略调整，见 C9）；已完成小包中 gcp-cloud-run、inspector 全绿；studio 观察到 `vi.waitFor`（vitest API）在 bun test 下 undefined（测试/runner 不匹配，C12） |
 | security-audit-skill | PASS：2 个 .test.cjs 全过 + 4 个校验器语法通过 |
 | claude-seo | PASS：3876 tests 全过（需先 `git init`） |
+| ai-website-cloner-template | PASS：clone-website skill（SKILL.md + 2 references）+ agent 文档（AGENTS.md/CLAUDE.md）+ Next.js 16 脚手架 + package.json 结构验证通过（无测试套件；克隆需带浏览器的 coding agent + `npm install`） |
 
 ## 冲突与修复（2026-11-22 实测定位）
 
@@ -131,7 +135,7 @@ bun install   # 或 npm install
 ## 目录结构
 
 ```
-packages/       16 个子包（保持上游结构）
+packages/       17 个子包（保持上游结构）
 tools/          顶层验证编排脚本（check-package.sh 分发 + 每包一个检查脚本）
 .monkeycode/    规格文档（需求与技术设计）
 .github/        CI workflow（GitHub Actions 跑全量 check）
@@ -152,6 +156,7 @@ packages.json   子包 manifest（名称、语言、上游 commit、构建/测�
 - **hyperframes**：完整构建/测试需 `bun install`；默认 check 只做 manifest + 技能目录验证。迁移时曾遗漏上游 `scripts/` 目录（build 后处理 + test:scripts 全部脚本测试依赖它），已从上游 `af0664c` 补齐（167 项）；上游另有的 `releases/`、`server.json`、`skills-manifest.json` 仅 CI 发布流程引用，未随迁。测试环境受限项：Chrome headless 缺失时浏览器相关测试自动降级。全量 `bun test` 注意：部分 studio 测试使用 vitest 的 `vi.waitFor` 但 runner 为 bun test（`vi` undefined，2026-11-22 实测观察到，属测试/runner 不匹配）；并行执行需控制进程数（17 路并行实测触发 OOM，串行或 ≤4 路并行安全）。
 - **security-audit-skill**：实际审计需 coding agent 基础设施（agent runtime + 并行 subagent + 沙箱）。
 - **claude-seo**：已基于 3.15 改写——google-ads 全系 ≤35.1.0 元数据声明 `<3.15`，实测 35.1.0 在 3.15.2 import 通过，setup 以 `--ignore-requires-python` 安装并纳入安装验证，8 处版本边界副本同步改写；PDF 报告需系统 pango；实际审计需 Claude Code 运行环境。测试环境受限项：`test_render_page_never_mode_against_example_com` 需访问 example.com（沙箱无外网时失败），属 live 网络测试。
+- **ai-website-cloner-template**：克隆网站需带浏览器访问能力的 AI coding agent（推荐 Claude Code + Opus 5.5，也支持 Codex/Cursor/OpenCode——无内置浏览器的宿主需配 Playwright MCP）+ Node.js 24+（上游要求）；`npm run check`（lint + typecheck + build）需先 `npm install`；默认 check 只做 skill + 脚手架结构验证。用途自担：上游明确禁止钓鱼冒充、盗用设计、违反目标站服务条款。
 
 ## 授权
 
@@ -162,6 +167,6 @@ packages.json   子包 manifest（名称、语言、上游 commit、构建/测�
 上游来源：
 
 - 媒体创作：[ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill) / [gif-factory](https://github.com/WoYun520/gif-factory) / [cinecode](https://github.com/sarpstar/cinecode) / [claude-animated-shorts](https://github.com/mromidev/claude-animated-shorts) / [rea-video](https://github.com/JuneYaooo/rea-video) / [craft-anything](https://github.com/storytold/craft-anything) / [unlose](https://github.com/unlose-app/unlose)
-- 建站/站点分析：[superpowers](https://github.com/obra/superpowers) / [open-code-review](https://github.com/alibaba/open-code-review) / [rea](https://github.com/morluto/rea) / [graphify](https://github.com/Graphify-Labs/graphify) / [hallmark](https://github.com/nutlope/hallmark) / [impeccable](https://github.com/pbakaus/impeccable) / [hyperframes](https://github.com/heygen-com/hyperframes) / [security-audit-skill](https://github.com/cloudflare/security-audit-skill) / [claude-seo](https://github.com/AgriciDaniel/claude-seo)
+- 建站/站点分析：[superpowers](https://github.com/obra/superpowers) / [ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) / [open-code-review](https://github.com/alibaba/open-code-review) / [rea](https://github.com/morluto/rea) / [graphify](https://github.com/Graphify-Labs/graphify) / [hallmark](https://github.com/nutlope/hallmark) / [impeccable](https://github.com/pbakaus/impeccable) / [hyperframes](https://github.com/heygen-com/hyperframes) / [security-audit-skill](https://github.com/cloudflare/security-audit-skill) / [claude-seo](https://github.com/AgriciDaniel/claude-seo)
 
 各子包对应的精确上游 commit 记录在 [packages.json](packages.json)。

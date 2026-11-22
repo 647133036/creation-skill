@@ -25,6 +25,7 @@ case "$PKG" in
   craft-anything)          bash "$ROOT/tools/check-craft-anything.sh" ;;
   unlose)                bash "$ROOT/tools/check-unlose.sh" ;;
   superpowers)           bash "$ROOT/tools/check-superpowers.sh" ;;
+  ai-website-cloner-template) bash "$ROOT/tools/check-ai-website-cloner-template.sh" ;;
   open-code-review)      bash "$ROOT/tools/check-open-code-review.sh" ;;
   rea)                   bash "$ROOT/tools/check-rea.sh" ;;
   graphify)              bash "$ROOT/tools/check-graphify.sh" ;;

@@ -208,6 +208,19 @@
       "license": "MIT",
       "buildCmd": "true",
       "testCmd": "bash tools/check-claude-seo.sh"
+    },
+    {
+      "name": "ai-website-cloner-template",
+      "path": "packages/ai-website-cloner-template",
+      "language": "typescript (Next.js 16 template)",
+      "node": ">=24 (upstream requirement); agents: Claude Code (recommended) / Codex / Cursor / OpenCode",
+      "runtimeNotes": "agent-skill website cloner: .agents/skills/clone-website (Map/Observe/Build/Compare four-step flow + Framer/motion inspection references) on a Next.js 16 + React 19 + TS strict + shadcn/ui + Tailwind v4 scaffold; cloning requires an AI coding agent with browser access; npm run check = lint + typecheck + build (needs npm install)",
+      "upstream": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "upstreamCommit": "5426e0e2",
+      "version": "0.6.1",
+      "license": "MIT",
+      "buildCmd": "true",
+      "testCmd": "bash tools/check-ai-website-cloner-template.sh"
     }
   ]
 }

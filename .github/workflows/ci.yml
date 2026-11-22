@@ -21,6 +21,7 @@ jobs:
           - craft-anything
           - unlose
           - superpowers
+          - ai-website-cloner-template
           - open-code-review
           - rea
           - graphify
