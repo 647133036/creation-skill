@@ -14,11 +14,13 @@ if [ ! -f "$SKILL_DIR/SKILL.md" ]; then
   echo "[ai-website-cloner-template] FAIL: .agents/skills/clone-website/SKILL.md missing"
   exit 1
 fi
+for ref in inspection-guide.md framer-and-motion.md; do
+  if [ ! -f "$SKILL_DIR/references/$ref" ]; then
+    echo "[ai-website-cloner-template] FAIL: references/$ref missing"
+    exit 1
+  fi
+done
 REFS=$(find "$SKILL_DIR/references" -name "*.md" -type f | wc -l)
-if [ "$REFS" -lt 2 ]; then
-  echo "[ai-website-cloner-template] FAIL: inspection-guide/framer-and-motion references missing"
-  exit 1
-fi
 
 for doc in AGENTS.md CLAUDE.md; do
   if [ ! -f "$PKG/$doc" ]; then
