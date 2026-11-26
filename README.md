@@ -1,10 +1,10 @@
 # Creation Skill Suite
 
-![version](https://img.shields.io/badge/version-0.1.3-blue) ![packages](https://img.shields.io/badge/packages-17-green) ![python](https://img.shields.io/badge/Python-3.15.2-blue) ![node](https://img.shields.io/badge/Node-24.22.3+-green)
+![version](https://img.shields.io/badge/version-0.1.4-blue) ![packages](https://img.shields.io/badge/packages-17-green) ![python](https://img.shields.io/badge/Python-3.15.2-blue) ![node](https://img.shields.io/badge/Node-24.22.3+-green)
 
 **v0.1.2** — 一个 monorepo，收拢 **17 个上游创作工具**：**媒体创作 7 个** + **建站/站点分析 10 个**。每个子包保持上游目录结构与许可证、独立可用；本仓库在其上提供统一的环境基线、验证入口与共享工程设施（Makefile / 检查脚本 / CI）。
 
-**v0.1.3 变更**：monorepo Node 基线从 22.23.4 对齐升至 **24.22.3**——ai-website-cloner-template 在 Node 24 下 `npm ci && npm run check`（lint + typecheck + Next.js 16 build）实测通过，superpowers 7/7 `.test.js`、security-audit-skill/hallmark/cinecode 冒烟复验通过；CI setup-node 同步升至 24。**v0.1.2 变更**：纳入 [ai-website-cloner-template](packages/ai-website-cloner-template)（39.6k star，agent skill 网站克隆器 + Next.js 16 脚手架）为第 17 个子包。
+**v0.1.4 变更**：ai-website-cloner-template 本地升级 `next` + `eslint-config-next` 16.3.5 → 16.4.6（满足 `@opennextjs/cloudflare` ≥16.4.5 的 Cloudflare Workers 部署要求，唯一偏离上游 5426e0e2 的改动，`npm run check` 复验通过）。**v0.1.3 变更**：monorepo Node 基线从 22.23.4 对齐升至 **24.22.3**——ai-website-cloner-template 在 Node 24 下 `npm ci && npm run check`（lint + typecheck + Next.js 16 build）实测通过，superpowers 7/7 `.test.js`、security-audit-skill/hallmark/cinecode 冒烟复验通过；CI setup-node 同步升至 24。**v0.1.2 变更**：纳入 [ai-website-cloner-template](packages/ai-website-cloner-template)（39.6k star，agent skill 网站克隆器 + Next.js 16 脚手架）为第 17 个子包。
 
 **v0.1.1 变更**：Linux 全量实测（2026-11-22，CPython 3.15.2 基线）后同步——重写验证状态、补齐 12 项冲突定位与 4 组修复（wrapper×9 / graphify 3.15 / ocr locale / 工具链），详见 [TEST-RECORD.md](TEST-RECORD.md)。
 
@@ -117,7 +117,7 @@ bun install   # 或 npm install
 | hyperframes | 全量 bun test 进行中/暂停（并发策略调整，见 C9）；已完成小包中 gcp-cloud-run、inspector 全绿；studio 观察到 `vi.waitFor`（vitest API）在 bun test 下 undefined（测试/runner 不匹配，C12） |
 | security-audit-skill | PASS：2 个 .test.cjs 全过 + 4 个校验器语法通过 |
 | claude-seo | PASS：3876 tests 全过（需先 `git init`） |
-| ai-website-cloner-template | PASS：clone-website skill（SKILL.md + 2 references）+ agent 文档（AGENTS.md/CLAUDE.md）+ Next.js 16 脚手架 + package.json 结构验证通过（默认 check）；Node 24.22.3 下 `npm ci && npm run check`（lint + typecheck + build）实测通过（2026-11-22）；克隆需带浏览器的 coding agent |
+| ai-website-cloner-template | PASS：clone-website skill（SKILL.md + 2 references）+ agent 文档（AGENTS.md/CLAUDE.md）+ Next.js 16 脚手架 + package.json 结构验证通过（默认 check）；Node 24.22.3 下 `npm ci && npm run check`（lint + typecheck + build）实测通过（2026-11-22），next 升 16.4.6 后复验通过（2026-11-26）；克隆需带浏览器的 coding agent |
 
 ## 冲突与修复（2026-11-22 实测定位）
 
